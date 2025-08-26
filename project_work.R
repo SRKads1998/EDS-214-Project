@@ -4,6 +4,7 @@ library(janitor)
 library(dplyr)
 library(paletteer)
 
+WorkbenchTest2 <- 50
 
 # 1. Import the datasets
 QuebradaCuenca1 <- read.csv(here("data", "QuebradaCuenca1-Bisley.csv"))

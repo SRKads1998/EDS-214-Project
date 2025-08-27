@@ -1,49 +1,41 @@
+# Create data frames based on sample data for analysis
+# Stephan Kadonoff
+#skadonoff@ucsb.edu
+
+install.packages("zoo")
+
+
+# Libraries used "zoo"# Libraries used for this analysis
 library(tidyverse)
 library(here)
 library(janitor)
 library(dplyr)
 library(paletteer)
+library(zoo)
 
-WorkbenchTest2 <- 50
+# Import Data sets containing field data
 
-# 1. Import the datasets
-QuebradaCuenca1 <- read.csv(here("data", "QuebradaCuenca1-Bisley.csv"))
+BQ1 <- read_csv(here("data", "QuebradaCuenca1-Bisley.csv"))
 Basic_Field_Data <- read.csv(here("data", "BasicFieldData-Streams.csv"))
-PRM_possible <- read.csv(here("data", "RioMameyesPuenteRoto.csv"))
-QuebradaCuenca2 <-read.csv(here("data", "QuebradaCuenca2-Bisley.csv"))
-QuebradaCuenca3 <- read.csv(here("data", "QuebradaCuenca3-Bisley.csv"))
+PRM <- read_csv(here("data", "RioMameyesPuenteRoto.csv"))
+BQ2 <-read_csv(here("data", "QuebradaCuenca2-Bisley.csv"))
+BQ3 <- read_csv(here("data", "QuebradaCuenca3-Bisley.csv"))
 
-# 2. Create subset dataframes for each chemical
+# 2. Seperating site data by chemical data to allow for easier binding across the different sites. 
 
-QC1_K <- QuebradaCuenca1 %>%
+# BQ1
+BQ1_K <- BQ1 %>%
   select(Sample_ID, Code, Sample_Date, Sample_Time, K)
-QC1_NO3 <- QuebradaCuenca1 %>%
-  select(Sample_ID, Code, Sample_Date, Sample_Time, NO3.N)
-QC1_Mg <- QuebradaCuenca1 %>%
+BQ1_NO3 <- BQ1 %>%
+  select(Sample_ID, Code, Sample_Date, Sample_Time, `NO3-N`)
+BQ1_Mg <- BQ1 %>%
   select(Sample_ID, Code, Sample_Date, Sample_Time, Mg)
-QC1_NH4 <- QuebradaCuenca1 %>%
-  select(Sample_ID, Code, Sample_Date, Sample_Time, NH4.N)
-QC2_K <- QuebradaCuenca2 %>%
+BQ1_NH4 <- BQ1 %>% 
+  select(Sample_ID, Code, Sample_Date, Sample_Time, `NH4-N`)
+
+# BQ2
+BQ2_K <- BQ2 %>% 
   select(Sample_ID, Code, Sample_Date, Sample_Time, K)
-QC2_NO3 <- QuebradaCuenca2 %>% 
-  select(Sample_ID, Code, Sample_Date, Sample_Time, NO3.N)
-QC2_Mg <- QuebradaCuenca2 %>%
-  select(Sample_ID, Code, Sample_Date, Sample_Time, Mg)
-QC2_NH4 <- QuebradaCuenca2 %>% 
-  select(Sample_ID, Code, Sample_Date, Sample_Time, NH4.N)
-QC3_K <- QuebradaCuenca3 %>%
-  select(Sample_ID, Code, Sample_Date, Sample_Time, K)
-QC3_NO3 <- QuebradaCuenca3 %>%
-  select(Sample_ID, Code, Sample_Date, Sample_Time, NO3.N)
-QC3_Mg <- QuebradaCuenca3 %>% 
-  select(Sample_ID, Code, Sample_Date, Sample_Time, Mg)
-QC3_NH4 <- QuebradaCuenca3 %>%
-  select(Sample_ID, Code, Sample_Date, Sample_Time, NH4.N)
-PRM_K <- PRM_possible %>%
-  select(Sample_ID, Code, Sample_Date, Sample_Time, K)
-PRM_NO3 <- PRM_possible %>%
-  select(Sample_ID, Code, Sample_Date, Sample_Time, NO3.N)
-PRM_Mg <- PRM_possible %>%
-  select(Sample_ID, Code, Sample_Date, Sample_Time, Mg)
-PRM_NH4 <- PRM_possible %>% 
-  select(Sample_ID, Code, Sample_Date, Sample_Time, NH4.N)
+BQ1_K <- BQ1_K %>%
+  mutate(Sample_Date = ymd(Sample_Date))
+

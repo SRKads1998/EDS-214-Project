@@ -1,0 +1,1 @@
+#rolling average script

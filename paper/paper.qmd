@@ -8,7 +8,9 @@ execute:
 
 ### Background
 
-This project is attempting to the replication of results found from a multi-year long study in Puerto Rico seeking to examine the levels of various chemicals found within various stream testing sites. This is
+This project is attempting to replicate the results found from a multi-year long study in Puerto Rico seeking to examine the levels of various chemicals within various stream testing sites.
+
+This study "Effects of Hurricane Disturbance on Stream Water Concentrations and Fluxes in Eight Tropical Forest Watershed of the Luqillo Experimental Forest, Puerto Rico" (Schaefer et. al)" examined many different sites, but this Quarto doc is limited to recreating a single figure comparing Potassium, Magnesium, Calcium, Ammonia, and Nitric Acid levels at 4 different test sites.
 
 ```{r}
 library(tidyverse)
@@ -17,7 +19,6 @@ library(janitor)
 library(dplyr)
 library(paletteer)
 library(zoo)
-library(googlesheets4)
 ```
 
 ### Data

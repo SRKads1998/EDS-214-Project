@@ -14,7 +14,7 @@ This repository contains the original sample collection data, a description of a
 
 To replicate, you will need to download [this](https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-luq.20.4923064) data package from the Environmental Data Initiative (Scahefer et al.), as well as ensure that you have installed the tidyverse, here, zoo, paletteer, and janitor packages. Below is an example of the general workflow for this project. Further details on specific steps may be found below.
 
-![Project Workflow](images/EDS-214 Project Workflow.png)
+![Project Workflow](images/EDS-214%20Project%20Workflow.png)
 
 ### Data
 
@@ -31,3 +31,7 @@ Supporting code was created to read-in the different CSV files, as well as to cl
 ### Outputs
 
 The final deliverable of this project, a quatro doc, containing the final figure, may be located within the "Deliverables" folder in the Project repository (WORKING)
+
+### Acknowledgements
+
+Schaefer DouglasA, McDowell WH, Scatena FN, Asbury CE. Effects of hurricane disturbance on stream water concentrations and fluxes in eight tropical forest watersheds of the Luquillo Experimental Forest, Puerto Rico. Journal of Tropical Ecology. 2000;16(2):189-207. <doi:10.1017/S0266467400001358>

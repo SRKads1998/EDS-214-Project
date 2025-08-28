@@ -14,7 +14,7 @@ This repository contains the original sample collection data, a description of a
 
 To replicate, you will need to download [this](https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-luq.20.4923064) data package from the Environmental Data Initiative (Scahefer et al.), as well as ensure that you have installed the tidyverse, here, zoo, paletteer, and janitor packages. Below is an example of the general workflow for this project. Further details on specific steps may be found below.
 
-![Project Workflow](images/EDS-214 Project Workflow.png)
+![Project Workflow](images/EDS-214_Project_Workflow.png)
 
 ### Data
 
@@ -30,4 +30,4 @@ Supporting code was created to read-in the different CSV files, as well as to cl
 
 ### Outputs
 
-The final deliverable of this project, a quatro doc, containing the final figure, may be located within the "Deliverables" folder in the Project repository (WORKING)
+The final deliverable of this project, a quatro doc, containing the final figure, may be located within the "Deliverables" folder in the Project repository (WORKING ADD Citation)

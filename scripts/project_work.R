@@ -85,7 +85,15 @@ class(BQ1_K_F10$Sample_Date)
 BQ1_K_F10 <- head(BQ1_K, 10)
 
 
+joined_sites_K$K <-as.numeric(joined_sites_K$K)
 
+joined_sites_K$rolling_average <- sapply(
+  joined_sites_K$Sample_Date,
+  moving_average,
+  dates = joined_sites_K$Sample_Date,
+  conc = joined_sites_K$K,
+  win_size_wks = 9
+)
 
 
 

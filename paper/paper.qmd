@@ -8,7 +8,7 @@ execute:
 
 ### Background
 
-This project is attempting to the replication of results found from a
+This project is attempting to the replication of results found from a multi-year long study in Puerto Rico seeking to examine the levels of various chemicals found within various stream testing sites. This is
 
 ```{r}
 library(tidyverse)

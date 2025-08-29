@@ -1,8 +1,8 @@
 ### Exceeds Spec
 
-#### The Student has provided attentive, constructive feedback in a peer review. 
+#### The Student has provided attentive, constructive feedback in a peer review.
 
-#### The student has contributed to a peer's repo by opening an issue and creating a pull request. 
+#### The student has contributed to a peer's repo by opening an issue and creating a pull request.
 
 I feel that the feedback I provided was detailed and concrete, which clearly communicated specific needs to get aspects of my peer's project to meet and exceed spec. This included the peer-assessment and the issues I created on Github. Also, I assisted the same peer by helping them incorporate a flowchart into their project.
 

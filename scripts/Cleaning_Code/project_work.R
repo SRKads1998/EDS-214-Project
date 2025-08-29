@@ -86,5 +86,11 @@ BQ1_K_F10 <- head(BQ1_K, 10)
 # sourced R script, possibly needed for Quarto
 source(here::here("scripts", "Analysis_Scripts", "moving_average_script.R"))
 
-
+joined_sites_function <- function() {
+    joined_sites_K <- bind_rows(BQ1_K, BQ2_K, BQ3_K, PRM_K),
+    joined_sites_NO3 <- bind_rows(BQ1_NO3, BQ2_NO3, BQ3_NO3, PRM_NO3),
+    joined_sites_Mg <- bind_rows(BQ1_Mg, BQ2_Mg, BQ3_Mg, PRM_Mg),
+    joined_sites_NH4 <- bind_rows(BQ1_NH4, BQ2_NH4, BQ3_NH4, PRM_NH4)
+}
+    
 

@@ -30,7 +30,7 @@ I appreciated the opportunity to see other peers work, and be able to more forma
 
 [NY] **The analysis produces the expected output**
 
-- Multiple plots, instead of one with multiple panels
+-   Multiple plots, instead of one with multiple panels
 
 [M] **Data import/cleaning is handled in its own script(s)**
 
@@ -40,11 +40,11 @@ I appreciated the opportunity to see other peers work, and be able to more forma
 
 [NY] Intermediate outputs are created and saved to a separate folder from raw data
 
-- Your data processing scripts don't save any outputs
+-   Your data processing scripts don't save any outputs
 
 [NY] **At least one piece of functionality has been refactored into a function in its own file**
 
-- You should have a separate function in the R/ folder. This should be sourced in paper.qmd.
+-   You should have a separate function in the R/ folder. This should be sourced in paper.qmd.
 
 ## Document
 
@@ -62,7 +62,7 @@ After cloning the repo on Workbench:
 
 [NY] Running the environment initialization script installs all required packages
 
-- You should have a script that installs the necessary packages for your analysis
+-   You should have a script that installs the necessary packages for your analysis
 
 [M] The analysis script runs without errors
 
@@ -72,7 +72,7 @@ After cloning the repo on Workbench:
 
 [E] **The student has contributed to a peer's repo by opening an issue and creating a pull request**
 
-- Thank you for being thoughtful in your contributions to your peer's work!!
+-   Thank you for being thoughtful in your contributions to your peer's work!!
 
 [M] The repo has at least three closed GitHub issues
 
@@ -80,4 +80,4 @@ After cloning the repo on Workbench:
 
 [NY] The rendered analysis is accessible via GitHub Pages
 
-- There's nothing in your docs/ folder, so there's nothing on GitHub Pages
+-   There's nothing in your docs/ folder, so there's nothing on GitHub Pages

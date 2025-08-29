@@ -74,7 +74,8 @@ PRM_Ca <- PRM %>%
   select(Sample_ID, Sample_Date, Ca)
 
 
-
+saveRDS(function_name, file = here:: here(outputs. something.rds))\
+function_name <- read(RDS)
 
 
 class(BQ1_K_F10$Sample_Date)

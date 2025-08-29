@@ -33,7 +33,7 @@ Supporting code was created to read-in the different CSV files, as well as to cl
 The final deliverable of this project, a quatro doc labeled "paper.qmd", may be located within the "paper" folder in the Project repository.
 
 |  |
-|------------------------------------------------------------------------|
+|----|
 | **\### Acknowledgements** |
 |  |
-| Schaefer Douglas A, McDowell WH, Scatena FN, Asbury CE. Effects of hurricane disturbance on stream water concentrations and fluxes in eight tropical forest watersheds of the Luquillo Experimental Forest, Puerto Rico. Journal of Tropical Ecology. 2000;16(2):189-207. \<[doi:10.1017/S0266467400001358\\](doi:10.1017/S0266467400001358\){.uri}\> |
+| Schaefer Douglas A, McDowell WH, Scatena FN, Asbury CE. Effects of hurricane disturbance on stream water concentrations and fluxes in eight tropical forest watersheds of the Luquillo Experimental Forest, Puerto Rico. Journal of Tropical Ecology. 2000;16(2):189-207. \<[[doi:10.1017/S0266467400001358\\\\](doi:10.1017/S0266467400001358\){.uri}]([doi:10.1017/S0266467400001358\\](doi:10.1017/S0266467400001358)%7B.uri%7D){.uri}\> |

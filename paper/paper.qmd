@@ -14,8 +14,10 @@ This study "Effects of Hurricane Disturbance on Stream Water Concentrations and 
 
 See the subsections below for more detailed explanations of each step of the analysis process.
 
+
 ```{r}
-# read in necessary libraries, such as tidyverse, here, zoo, and janitor
+# install and then read in necessary libraries, such as tidyverse, here, zoo, and janitor
+source(here::here("scripts", "Cleaning_Code", "install_packages.R"))
 source(here::here("scripts", "Cleaning_Code", "read_libraries.R"))
 ```
 
@@ -62,6 +64,43 @@ joined_sites_Ca <- bind_rows(BQ1_Ca, BQ2_Ca, BQ3_Ca, PRM_Ca)
 
 ### Results
 Finally, we visualized the sample data trends over the period from the sites' earliest recordings through the end of 1995 to match the graphs in the original figure. Due to the methodology utilized, we were unable to facet a single data frame to include the 5 graphs below as a single joined plot. Were  I to repeat this analysis, I would try to keep all the data sets in one table, and then conduct the analysis there, as it would likely allow for a better visualization of the data.  
+
+EDIT* after instructor feedback, I utilized functionality from the patchwork library to stack the 5 graphs in one column. keeping the original 5 graphs for comparison and consistency with previous text. 
+
+```{r}
+#| echo: false
+Potassium_plot <- ggplot() +
+  geom_line(data = joined_sites_K, aes(x = Sample_Date, y = rolling_average, color = Sample_ID)) + 
+  labs(x = "Years",
+       y = "K mg l-1",
+       color = " ")
+
+Nitrate_plot <- ggplot() +
+  geom_line(data = joined_sites_NO3, aes(x = Sample_Date, y = rolling_average, color = Sample_ID)) + 
+  labs(x = "Years",
+       y = "NO3-N ug l-1",
+       color = " ")
+
+MG_plot <- ggplot() +
+  geom_line(data = joined_sites_Mg, aes(x = Sample_Date, y = rolling_average, color = Sample_ID)) + 
+  labs(x = "Years",
+       y = "Mg mg l-1")
+
+Ca_plot <- ggplot() +
+  geom_line(data = joined_sites_Ca, aes(x = Sample_Date, y = rolling_average, color = Sample_ID)) + 
+  labs(x = "Years",
+       y = "Ca mg l-1",
+       color = " ")
+
+Ammonia_plot <- ggplot() +
+  geom_line(data = joined_sites_NH4, aes(x = Sample_Date, y = rolling_average, colour = Sample_ID)) + 
+  labs(x = "Years",
+       y = "NH4-N ug l-1",
+       color = " ")
+
+Nitrate_plot / Potassium_plot / MG_plot / Ca_plot / Ammonia_plot
+```
+
 
 
 ## Potassium Plot

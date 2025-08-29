@@ -15,100 +15,23 @@ This study "Effects of Hurricane Disturbance on Stream Water Concentrations and 
 See the subsections below for more detailed explanations of each step of the analysis process.
 
 ```{r}
+# read in necessary libraries, such as tidyverse, here, zoo, and janitor
 source(here::here("scripts", "Cleaning_Code", "read_libraries.R"))
 ```
 
-```{r}
-library(tidyverse)
-library(here)
-library(janitor)
-library(dplyr)
-library(paletteer)
-library(zoo)
-```
 
 ### Data
+In the data section, we utilized several csv files containing extensive records of sample data from the 4 relevant sites. As part of my developed workflow, I decided to subset out each relevant chemical from each testing site. This was done to help better understand specific trends, keep the data tidy, and ultimately more manageable later in the analysis process. 
 
 ```{r}
-# read in the relevant CSV files
-BQ1 <- read_csv(here("data", "QuebradaCuenca1-Bisley.csv"))
-Basic_Field_Data <- read.csv(here("data", "BasicFieldData-Streams.csv"))
-PRM <- read_csv(here("data", "RioMameyesPuenteRoto.csv"))
-BQ2 <-read_csv(here("data", "QuebradaCuenca2-Bisley.csv"))
-BQ3 <- read_csv(here("data", "QuebradaCuenca3-Bisley.csv"))
-#Filter the date range to better match the original time line of Figure 3
-BQ1 <- BQ1 %>%
-  filter(Sample_Date < "1996-01-01")
-BQ2 <- BQ2 %>%
-  filter(Sample_Date < "1996-01-01")
-BQ3 <- BQ3 %>%
-  filter(Sample_Date < "1996-01-01")
-PRM <- PRM %>%
-  filter(Sample_Date < "1996-01-01")
-
-# BQ1
-BQ1_K <- BQ1 %>%
-  select(Sample_ID, Sample_Date, K)
-BQ1_NO3 <- BQ1 %>%
-  select(Sample_ID, Sample_Date, 'NO3-N')
-BQ1_Mg <- BQ1 %>%
-  select(Sample_ID, Sample_Date, Mg)
-BQ1_NH4 <- BQ1 %>% 
-  select(Sample_ID, Sample_Date, 'NH4-N')
-BQ1_Ca <- BQ1 %>%
-  select(Sample_ID, Sample_Date, Ca)
-
-# BQ2
-BQ2_K <- BQ2 %>% 
-  select(Sample_ID, Sample_Date, K)
-BQ2_NO3 <- BQ2 %>%
-  select(Sample_ID, Sample_Date, `NO3-N`)
-BQ2_Mg <- BQ2 %>%
-  select(Sample_ID, Sample_Date, Mg)
-BQ2_NH4 <- BQ2 %>%
-  select(Sample_ID, Sample_Date, `NH4-N`)
-BQ2_Ca <- BQ2 %>%
-  select(Sample_ID, Sample_Date, Ca)
-
-#BQ3
-BQ3_K <- BQ3 %>%
-  select(Sample_ID, Sample_Date, K)
-BQ3_NO3 <- BQ3 %>%
-  select(Sample_ID, Sample_Date, `NO3-N`)
-BQ3_Mg <- BQ3 %>%
-  select(Sample_ID, Sample_Date, Mg)
-BQ3_NH4 <- BQ3 %>%
-  select(Sample_ID, Sample_Date, `NH4-N`)
-BQ3_Ca <- BQ3 %>%
-  select(Sample_ID, Sample_Date, Ca)
-
-#PRM
-PRM_K <- PRM %>%
-  select(Sample_ID, Sample_Date, K)
-PRM_NO3 <- PRM %>%
-  select(Sample_ID, Sample_Date, `NO3-N`)
-PRM_Mg <- PRM %>%
-  select(Sample_ID, Sample_Date, Mg)
-PRM_NH4 <- PRM %>%
-  select(Sample_ID, Sample_Date, `NH4-N`)
-PRM_Ca <- PRM %>%
-  select(Sample_ID, Sample_Date, Ca)
+# stage the sourced and cleaned data from the the "data_cleaning_source.R" script. This contains the subsets of each testing site by chemical. This is done so that each set may 
+source(here::here("scripts", "Cleaning_Code", "data_cleaning_source.R"))
 ```
 
 ### Methods
+The main function utilized for this analysis was a function titled "rolling_average_script" which was replication of a shared within class. The principle difference between the two is that, to account for Na results within the data sets, a small edit was made when calculating the mean. See the code chunk below for the details.
 
 ```{r}
-moving_average <- function(focal_date, dates, conc, win_size_wks) {
-  # Which dates are in the window?
-  is_in_window <- (dates > focal_date - (win_size_wks / 2) * 7) &
-    (dates < focal_date + (win_size_wks / 2) * 7)
-  # Find the associated concentrations
-  window_conc <- conc[is_in_window]
-  # Calculate the mean
-  result <- mean(window_conc, na.rm = TRUE)
-  
-  return(result)
-}
 
 rolling_average_script <- function(focal_date, dates, conc, win_size_wks) {
   is_in_window <- (dates > focal_date - (win_size_wks / 2) * 7) &
@@ -118,156 +41,167 @@ rolling_average_script <- function(focal_date, dates, conc, win_size_wks) {
   return(result)
 }
 
-BQ1_K$rolling_average <- sapply(
-  BQ1_K$Sample_Date, 
-)
 ```
 
-### Results
+We then utilized the above function within a different R script, and applied it to the many different subsets. To keep this document more readible, we've sourced in that script.
 
 ```{r}
+source(here::here("scripts", "Analysis_Scripts", "moving_average_script.R"))
+```
+
+
+```{r}
+#| echo: false
 # Finding the rolling average for Potassium sample data
 BQ1_K$rolling_average <- sapply(
   BQ1_K$Sample_Date,
-  moving_average, dates = BQ1_K$Sample_Date, conc = BQ1_K$K,
+  rolling_average_script, dates = BQ1_K$Sample_Date, conc = BQ1_K$K,
   win_size_wks = 9
 )
 BQ2_K$rolling_average <- sapply(
   BQ2_K$Sample_Date,
-  moving_average, dates = BQ2_K$Sample_Date, conc = BQ2_K$K,
+  rolling_average_script, dates = BQ2_K$Sample_Date, conc = BQ2_K$K,
   win_size_wks = 9
 )
 BQ3_K$rolling_average <- sapply(
   BQ3_K$Sample_Date,
-  moving_average, dates = BQ3_K$Sample_Date, conc = BQ3_K$K,
+  rolling_average_script, dates = BQ3_K$Sample_Date, conc = BQ3_K$K,
   win_size_wks = 9
 )
 PRM_K$rolling_average <- sapply(
   PRM_K$Sample_Date,
-  moving_average, dates = PRM_K$Sample_Date, conc = PRM_K$K,
+  rolling_average_script, dates = PRM_K$Sample_Date, conc = PRM_K$K,
   win_size_wks = 9
 )
 
 # Finding the rolling average for Nitrate sample data
 BQ1_NO3$rolling_average <- sapply(
   BQ1_NO3$Sample_Date,
-  moving_average, dates = BQ1_NO3$Sample_Date, conc = BQ1_NO3$`NO3-N`,
+  rolling_average_script, dates = BQ1_NO3$Sample_Date, conc = BQ1_NO3$`NO3-N`,
   win_size_wks = 9
 )
 BQ2_NO3$rolling_average <- sapply(
   BQ2_NO3$Sample_Date,
-  moving_average, dates = BQ2_NO3$Sample_Date, conc = BQ2_NO3$`NO3-N`,
+  rolling_average_script, dates = BQ2_NO3$Sample_Date, conc = BQ2_NO3$`NO3-N`,
   win_size_wks = 9
 )
 BQ3_NO3$rolling_average <- sapply(
   BQ3_NO3$Sample_Date,
-  moving_average, dates = BQ3_NO3$Sample_Date, conc = BQ3_NO3$`NO3-N`,
+  rolling_average_script, dates = BQ3_NO3$Sample_Date, conc = BQ3_NO3$`NO3-N`,
   win_size_wks = 9
 )
 PRM_NO3$rolling_average <- sapply(
   PRM_NO3$Sample_Date,
-  moving_average, dates = PRM_NO3$Sample_Date, conc = PRM_NO3$`NO3-N`,
+  rolling_average_script, dates = PRM_NO3$Sample_Date, conc = PRM_NO3$`NO3-N`,
   win_size_wks = 9
 )
 
 # Finding the rolling average for Magnesium sample data
 BQ1_Mg$rolling_average <- sapply(
   BQ1_Mg$Sample_Date,
-  moving_average, dates = BQ1_Mg$Sample_Date, conc = BQ1_Mg$Mg,
+  rolling_average_script, dates = BQ1_Mg$Sample_Date, conc = BQ1_Mg$Mg,
   win_size_wks = 9
 )
 BQ2_Mg$rolling_average <- sapply(
   BQ2_Mg$Sample_Date,
-  moving_average, dates = BQ2_Mg$Sample_Date, conc = BQ2_Mg$Mg,
+  rolling_average_script, dates = BQ2_Mg$Sample_Date, conc = BQ2_Mg$Mg,
   win_size_wks = 9
 )
 BQ3_Mg$rolling_average <- sapply(
   BQ3_Mg$Sample_Date,
-  moving_average, dates = BQ3_Mg$Sample_Date, conc = BQ3_Mg$Mg,
+  rolling_average_script, dates = BQ3_Mg$Sample_Date, conc = BQ3_Mg$Mg,
   win_size_wks = 9
 )
 PRM_Mg$rolling_average <- sapply(
   PRM_Mg$Sample_Date,
-  moving_average, dates = PRM_Mg$Sample_Date, conc = PRM_Mg$Mg,
+  rolling_average_script, dates = PRM_Mg$Sample_Date, conc = PRM_Mg$Mg,
   win_size_wks = 9
 )
 # Finding the rolling average for Calcium sample data
 BQ1_Ca$rolling_average <- sapply(
   BQ1_Ca$Sample_Date,
-  moving_average, dates = BQ1_Ca$Sample_Date, conc = BQ1_Ca$Ca,
+  rolling_average_script, dates = BQ1_Ca$Sample_Date, conc = BQ1_Ca$Ca,
   win_size_wks = 9
 )
 BQ2_Ca$rolling_average <- sapply(
   BQ2_Ca$Sample_Date,
-  moving_average, dates = BQ2_Ca$Sample_Date, conc = BQ2_Ca$Ca,
+  rolling_average_script, dates = BQ2_Ca$Sample_Date, conc = BQ2_Ca$Ca,
   win_size_wks = 9
 )
 BQ3_Ca$rolling_average <- sapply(
   BQ3_Ca$Sample_Date,
-  moving_average, dates = BQ3_Ca$Sample_Date, conc = BQ3_Ca$Ca,
+  rolling_average_script, dates = BQ3_Ca$Sample_Date, conc = BQ3_Ca$Ca,
   win_size_wks = 9
 )
 PRM_Ca$rolling_average <- sapply(
   PRM_Ca$Sample_Date,
-  moving_average, dates = PRM_Ca$Sample_Date, conc = PRM_Ca$Ca,
+  rolling_average_script, dates = PRM_Ca$Sample_Date, conc = PRM_Ca$Ca,
   win_size_wks = 9
 )
 # Finding the rolling average for Ammonia sample data
 BQ1_NH4$rolling_average <- sapply(
   BQ1_NH4$Sample_Date,
-  moving_average, dates = BQ1_NH4$Sample_Date, conc = BQ1_NH4$`NH4-N`,
+  rolling_average_script, dates = BQ1_NH4$Sample_Date, conc = BQ1_NH4$`NH4-N`,
   win_size_wks = 9
 )
 BQ2_NH4$rolling_average <- sapply(
   BQ2_NH4$Sample_Date,
-  moving_average, dates = BQ2_NH4$Sample_Date, conc = BQ2_NH4$`NH4-N`,
+  rolling_average_script, dates = BQ2_NH4$Sample_Date, conc = BQ2_NH4$`NH4-N`,
   win_size_wks = 9
 )
 BQ3_NH4$rolling_average <- sapply(
   BQ3_NH4$Sample_Date,
-  moving_average, dates = BQ3_NH4$Sample_Date, conc = BQ3_NH4$`NH4-N`,
+  rolling_average_script, dates = BQ3_NH4$Sample_Date, conc = BQ3_NH4$`NH4-N`,
   win_size_wks = 9
 )
 PRM_NH4$rolling_average <- sapply(
   PRM_NH4$Sample_Date,
-  moving_average, dates = PRM_NH4$Sample_Date, conc = PRM_NH4$`NH4-N`,
+  rolling_average_script, dates = PRM_NH4$Sample_Date, conc = PRM_NH4$`NH4-N`,
   win_size_wks = 9
 )
 ```
+
+After the rolling average function was applied to each of the location/chemical subsets, we then rejoined the data frames by their chemical sample for visualization.
+
+```{r}
+joined_sites_K <- bind_rows(BQ1_K, BQ2_K, BQ3_K, PRM_K)
+joined_sites_NO3 <- bind_rows(BQ1_NO3, BQ2_NO3, BQ3_NO3, PRM_NO3)
+joined_sites_Mg <- bind_rows(BQ1_Mg, BQ2_Mg, BQ3_Mg, PRM_Mg)
+joined_sites_NH4 <- bind_rows(BQ1_NH4, BQ2_NH4, BQ3_NH4, PRM_NH4)
+joined_sites_Ca <- bind_rows(BQ1_Ca, BQ2_Ca, BQ3_Ca, PRM_Ca)
+```
+
+
+### Results
+Finally, we visualized the sample data trends over the period from the sites' earliest recordings through the end of 1995 to match the graphs in the original figure. Due to the methodology utilized, we were unable to facet a single dataframe to include the 5 graphs below as a single joined plot. Were  I to repeat this analysis, I would try to keep all the data sets in one table, and then conduct the analysis there. 
+
 
 ## Potassium Plot
 
 ```{r}
 ggplot() +
-  geom_line(data = BQ1_K, aes(x = Sample_Date, y = rolling_average, color = "red")) +
-  geom_line(data = BQ2_K, aes(x = Sample_Date, y = rolling_average, color = "blue")) +
-  geom_line(data = BQ3_K, aes(x = Sample_Date, y = rolling_average, color = "yellow")) +
-  geom_line(data = PRM_K, aes(x = Sample_Date, y = rolling_average, color = "green")) +
+  geom_line(data = joined_sites_K, aes(x = Sample_Date, y = rolling_average, colour = Sample_ID)) + 
   labs(x = "Years",
        y = "K mg l-1")
+  
+
 ```
 
 ## Nitrate Plot
 
 ```{r}
 ggplot() +
-  geom_line(data = BQ1_NO3, aes(x = Sample_Date, y = rolling_average, color = "red")) +
-  geom_line(data = BQ2_NO3, aes(x = Sample_Date, y = rolling_average, color = "blue")) +
-  geom_line(data = BQ3_NO3, aes(x = Sample_Date, y = rolling_average, color = "yellow")) +
-  geom_line(data = PRM_NO3, aes(x = Sample_Date, y = rolling_average, color = "green")) +
+  geom_line(data = joined_sites_NO3, aes(x = Sample_Date, y = rolling_average, colour = Sample_ID)) + 
   labs(x = "Years",
        y = "NO3-N ug l-1")
+
 ```
 
 ## Magnesium Plot
 
 ```{r}
-warning(FALSE)
 ggplot() +
-  geom_line(data = BQ1_Mg, aes(x = Sample_Date, y = rolling_average, color =  "red")) +
-  geom_line(data = BQ2_Mg, aes(x = Sample_Date, y = rolling_average, color = "blue")) +
-  geom_line(data = BQ3_Mg, aes(x = Sample_Date, y = rolling_average, color = "yellow")) +
-  geom_line(data = PRM_Mg, aes(x = Sample_Date, y = rolling_average, color = "green")) +
+  geom_line(data = joined_sites_Mg, aes(x = Sample_Date, y = rolling_average, colour = Sample_ID)) + 
   labs(x = "Years",
        y = "Mg mg l-1")
 ```
@@ -276,22 +210,23 @@ ggplot() +
 
 ```{r}
 ggplot() +
-  geom_line(data = BQ1_Ca, aes(x = Sample_Date, y = rolling_average, color = "red")) +
-  geom_line(data = BQ2_Ca, aes(x = Sample_Date, y = rolling_average, color = "blue")) +
-  geom_line(data = BQ3_Mg, aes(x = Sample_Date, y = rolling_average, color = "yellow")) +
-  geom_line(data = PRM_Ca, aes(x = Sample_Date, y = rolling_average, color = "green")) +
-  labs (x = "Years",
-        y = "Ca mg l-1")
+  geom_line(data = joined_sites_Ca, aes(x = Sample_Date, y = rolling_average, colour = Sample_ID)) + 
+  labs(x = "Years",
+       y = "Ca mg l-1")
 ```
 
 ## Ammonia Plot
 
 ```{r}
 ggplot() +
-  geom_line(data = BQ1_NH4, aes(x = Sample_Date, y = rolling_average, color = "red")) +
-  geom_line(data = BQ2_NH4, aes(x = Sample_Date, y = rolling_average, color = "blue")) +
-  geom_line(data = BQ3_NH4, aes(x = Sample_Date, y = rolling_average, color = "yellow")) +
-  geom_line(data = PRM_NH4, aes(x = Sample_Date, y = rolling_average, color = "green")) +
+  geom_line(data = joined_sites_NH4, aes(x = Sample_Date, y = rolling_average, colour = Sample_ID)) + 
   labs(x = "Years",
        y = "NH4-N ug l-1")
 ```
+
+
+
+
+## Acknowledgements
+
+Schaefer DouglasA, McDowell WH, Scatena FN, Asbury CE. "Effects of hurricane disturbance on stream water concentrations and fluxes in eight tropical forest watersheds of the Luquillo Experimental Forest, Puerto Rico." Journal of Tropical Ecology. 2000;16(2):189-207. <doi:10.1017/S0266467400001358>

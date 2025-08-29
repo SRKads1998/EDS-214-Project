@@ -83,7 +83,8 @@ class(BQ1_K_F10$Sample_Date)
 BQ1_K_F10 <- head(BQ1_K, 10)
 
 
-
+# sourced R script, possibly needed for Quarto
+source(here::here("scripts", "Analysis_Scripts", "moving_average_script.R"))
 
 
 

@@ -22,7 +22,7 @@ Relevant data from the above listed data package (Schaefer et. al) was utilized 
 
 ### Analysis Scripts
 
-The two key Script files were the "moving_average_script.R" and the "plotting_scripts.R", both of which may be found in the Analysis Scripts subfolder, within the "scripts" folder located in the main project repository. Run the code within each script, beginning with "moving_average_script.R" to add an additional data column to each of the dataframes for analysis (BQ1, BQ2 etc...). Once each data frame has utilized the rolling_average_script, then you may visualize the various graphs via the ggplot functions found within the "plotting_scripts.R" file.
+The two key Script files were the "moving_average_script.R" and the "plotting_scripts.R", both of which may be found in the Analysis Scripts subfolder, within the "scripts" folder located in the main project repository. Run the code within each script, beginning with "moving_average_script.R" to add an additional data column to each of the dataframes for analysis (BQ1, BQ2 etc...). Once each data frame has utilized the rolling_average_script, then you may visualize the various graphs via the ggplot functions found within the "plotting_scripts.R" file. Aspects of the "moving_average_script.R" code were loaded into a separate script file titled "staged_analysis.R" which was then sourced in to the Quarto doc for easier formatting and clarity.
 
 ### Supporting Code
 

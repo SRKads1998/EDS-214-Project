@@ -36,4 +36,4 @@ The final deliverable of this project, a quatro doc labeled "paper.qmd", may be 
 |----|
 | **\### Acknowledgements** |
 |  |
-| Schaefer DouglasA, McDowell WH, Scatena FN, Asbury CE. Effects of hurricane disturbance on stream water concentrations and fluxes in eight tropical forest watersheds of the Luquillo Experimental Forest, Puerto Rico. Journal of Tropical Ecology. 2000;16(2):189-207. \<doi:10.1017/S0266467400001358\> |
+| Schaefer DouglasA, McDowell WH, Scatena FN, Asbury CE. Effects of hurricane disturbance on stream water concentrations and fluxes in eight tropical forest watersheds of the Luquillo Experimental Forest, Puerto Rico. Journal of Tropical Ecology. 2000;16(2):189-207. \<[doi:10.1017/S0266467400001358\\](doi:10.1017/S0266467400001358\){.uri}\> |

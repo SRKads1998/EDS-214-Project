@@ -3,7 +3,7 @@
 # Potassium graphs
 library(patchwork)
 
-ggplot() +
+Potassium_plot <- ggplot() +
   geom_line(data = joined_sites_K, aes(x = Sample_Date, y = rolling_average, color = Sample_ID)) + 
   labs(x = "Years",
        y = "K mg l-1",
@@ -77,5 +77,7 @@ ggplot() +
   labs(x = "Years",
        y = "NH4-N ug l-1")
 
-Potassium_plot / Nitrate_plot / MG_plot / Ca_plot / Ammonia_plot
+Nitrate_plot / Potassium_plot / MG_plot / Ca_plot / Ammonia_plot
+
+#Throughout this stage of the workflow, I found a potential solution that would allow for the 5 distinct ggplots to be stacked atop one another, however due to skillset limitations, and concerns that incorporating the changes could impact the final version of Quarto doc, this graphic was left out of the final version. 
 

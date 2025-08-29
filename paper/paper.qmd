@@ -61,7 +61,7 @@ joined_sites_Ca <- bind_rows(BQ1_Ca, BQ2_Ca, BQ3_Ca, PRM_Ca)
 
 
 ### Results
-Finally, we visualized the sample data trends over the period from the sites' earliest recordings through the end of 1995 to match the graphs in the original figure. Due to the methodology utilized, we were unable to facet a single dataframe to include the 5 graphs below as a single joined plot. Were  I to repeat this analysis, I would try to keep all the data sets in one table, and then conduct the analysis there. 
+Finally, we visualized the sample data trends over the period from the sites' earliest recordings through the end of 1995 to match the graphs in the original figure. Due to the methodology utilized, we were unable to facet a single data frame to include the 5 graphs below as a single joined plot. Were  I to repeat this analysis, I would try to keep all the data sets in one table, and then conduct the analysis there, as it would likely allow for a better visualization of the data.  
 
 
 ## Potassium Plot
@@ -116,8 +116,6 @@ ggplot() +
        y = "NH4-N ug l-1",
        color = " ")
 ```
-
-
 
 
 ## Acknowledgements

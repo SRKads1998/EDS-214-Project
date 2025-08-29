@@ -1,3 +1,5 @@
+#Example rolling mean function from class demonstration
+
 # install.packages("googlesheets4")
 
 

@@ -13,7 +13,7 @@ library(janitor)
 library(dplyr)
 library(paletteer)
 library(zoo)
-library(googlesheets4)
+
 
 # Import Data sets containing field data
 
@@ -73,11 +73,7 @@ PRM_NH4 <- PRM %>%
 PRM_Ca <- PRM %>%
   select(Sample_ID, Sample_Date, Ca)
 
-#Join the separate sites by chemical
-joined_sites_K <- bind_rows(BQ1_K, BQ2_K, BQ3_K, PRM_K)
-joined_sites_NO3 <- bind_rows(BQ1_NO3, BQ2_NO3, BQ3_NO3, PRM_NO3)
-joined_sites_Mg <- bind_rows(BQ1_Mg, BQ2_Mg, BQ3_Mg, PRM_Mg)
-joined_sites_NH4 <- bind_rows(BQ1_NH4, BQ2_NH4, BQ3_NH4, PRM_NH4)
+
 
 
 

@@ -15,6 +15,10 @@ This study "Effects of Hurricane Disturbance on Stream Water Concentrations and 
 See the subsections below for more detailed explanations of each step of the analysis process.
 
 ```{r}
+source(here::here("scripts", "Cleaning_Code", "read_libraries.R"))
+```
+
+```{r}
 library(tidyverse)
 library(here)
 library(janitor)
@@ -26,12 +30,13 @@ library(zoo)
 ### Data
 
 ```{r}
+# read in the relevant CSV files
 BQ1 <- read_csv(here("data", "QuebradaCuenca1-Bisley.csv"))
 Basic_Field_Data <- read.csv(here("data", "BasicFieldData-Streams.csv"))
 PRM <- read_csv(here("data", "RioMameyesPuenteRoto.csv"))
 BQ2 <-read_csv(here("data", "QuebradaCuenca2-Bisley.csv"))
 BQ3 <- read_csv(here("data", "QuebradaCuenca3-Bisley.csv"))
-#Filter the date range
+#Filter the date range to better match the original time line of Figure 3
 BQ1 <- BQ1 %>%
   filter(Sample_Date < "1996-01-01")
 BQ2 <- BQ2 %>%
@@ -100,7 +105,7 @@ moving_average <- function(focal_date, dates, conc, win_size_wks) {
   # Find the associated concentrations
   window_conc <- conc[is_in_window]
   # Calculate the mean
-  result <- mean(window_conc)
+  result <- mean(window_conc, na.rm = TRUE)
   
   return(result)
 }
@@ -109,9 +114,13 @@ rolling_average_script <- function(focal_date, dates, conc, win_size_wks) {
   is_in_window <- (dates > focal_date - (win_size_wks / 2) * 7) &
     (dates < focal_date + (win_size_wks / 2) * 7)
   window_conc <- conc[is_in_window]
-  result <- mean(window_conc)
+  result <- mean(window_conc, na.rm = TRUE)
   return(result)
 }
+
+BQ1_K$rolling_average <- sapply(
+  BQ1_K$Sample_Date, 
+)
 ```
 
 ### Results

@@ -30,4 +30,4 @@ Supporting code was created to read-in the different CSV files, as well as to cl
 
 ### Outputs
 
-The final deliverable of this project, a quatro doc, containing the final figure, may be located within the "Deliverables" folder in the Project repository (WORKING ADD Citation)
+The final deliverable of this project, a quatro doc labeled "paper.qmd", may be located within the "paper" folder in the Project repository (WORKING ADD Citation)

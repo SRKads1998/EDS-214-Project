@@ -2,6 +2,8 @@
 
 **NOTE:** Your two "exceeds" specs have to be in different learning objectives
 
+- I didn't see a request for me to assess a different spec for Exceeds.
+
 #### The Student has provided attentive, constructive feedback in a peer review.
 
 #### The student has contributed to a peer's repo by opening an issue and creating a pull request.
@@ -28,9 +30,10 @@ I appreciated the opportunity to see other peers work, and be able to more forma
 
 [M] The analysis runs without errors
 
-[NY] **The analysis produces the expected output**
+[M] **The analysis produces the expected output**
 
 -   Multiple plots, instead of one with multiple panels
+-   Nice use of patchwork! One piece of feedback: future work should aim to be clean and professional, which includes cleaning up extraneous code. In this case, that means removing the individual nutrient plots after you figured out how to combine them.
 
 [M] **Data import/cleaning is handled in its own script(s)**
 
@@ -38,13 +41,15 @@ I appreciated the opportunity to see other peers work, and be able to more forma
 
 [M] Raw data is contained in its own folder
 
-[NY] Intermediate outputs are created and saved to a separate folder from raw data
+[M] Intermediate outputs are created and saved to a separate folder from raw data
 
 -   Your data processing scripts don't save any outputs
+-   joined_sites.R now saves intermediate outputs. That's great! In the future, you should _read_ those outputs directly, instead of re-running the scripts, in your analysis Quarto document.
 
 [NY] **At least one piece of functionality has been refactored into a function in its own file**
 
 -   You should have a separate function in the R/ folder. This should be sourced in paper.qmd.
+-   I still don't see an R/ folder with a function definition in it.
 
 ## Document
 
@@ -60,9 +65,10 @@ I appreciated the opportunity to see other peers work, and be able to more forma
 
 After cloning the repo on Workbench:
 
-[NY] Running the environment initialization script installs all required packages
+[M] Running the environment initialization script installs all required packages
 
 -   You should have a script that installs the necessary packages for your analysis
+-   You do have an install_packages.R script now which sets up your environment, which meets the spec. It is kind of hard to find, though. Consider pointing to it in your README.
 
 [M] The analysis script runs without errors
 
